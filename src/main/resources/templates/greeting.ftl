@@ -1,8 +1,4 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
-    <div align="center">
-        <h5>Привет, друг!</h5>
-    </div>
+    <p>Hello my friends</p>
 </@c.page>
-</div>
-</div>

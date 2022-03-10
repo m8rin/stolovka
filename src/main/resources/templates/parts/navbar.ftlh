@@ -1,24 +1,54 @@
 <#include "security.ftlh">
 <#import "login.ftlh" as l>
+<#import "sidePanel.ftlh" as sp>
 
-<#--<nav class="navbar navbar-dark bg-dark">-->
-<#--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<a class="navbar-brand" href="/">Stolovka</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <#if isAdmin>
-            <li class="nav-item">
-                <a class="nav-link" href="/user">Список пользователей</a>
-            </li>
-            </#if>
-        </ul>
-
-        <div class="navbar-text mr-3">${name}</div>
-        <@l.logout />
+<div class="header-controls">
+    <div class="header-left-controls">
+        <button class="header-menu" onclick="hidePanel()">
+            <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+        </button>
+        <div class="header-address">
+            <div>г. Уфа</div>
+            <div>Космонавтов, 4а</div>
+        </div>
+        <div class="header-search">
+            <form>
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <input type="text" placeholder="Введите название блюда">
+            </form>
+        </div>
     </div>
-</nav>
+    <div class="header-right-controls">
+        <#if known>
+            <a class="header-user" href="/">
+                <div>${name}</div>
+                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+            </a>
+        <#else>
+            <a class="header-user" href="/login">
+                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+            </a>
+        </#if>
+        <a class="header-basket" href="/basket">
+            <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
+        </a>
+
+    </div>
+</div>
+
+<@sp.panel/>
+
+<#--
+<a href="/">Stolovka</a>
+<div>
+    <ul>
+        <#if isAdmin>
+            <li>
+                <a href="/user">Список пользователей</a>
+            </li>
+        </#if>
+    </ul>
+
+</div>
+-->
+<@l.logoutBut/>

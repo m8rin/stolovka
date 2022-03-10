@@ -1,40 +1,35 @@
 <#macro login path isRegisterForm>
-
-    <div class="form-group row">
-        <label class="col"> </label>
-    </div>
-    <div class="container align-middle">
-        <div class="row justify-content-center align-items-center">
+    <div class="login-block-background" id="login-block-background">
+        <div class="login-block">
+            <div class="login-title">Авторизация</div>
             <form action="${path}" method="post">
-                <div class="form-group row ">
-                    <label class="col-sm-5 col-form-label">Имя пользователя:</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="username" class="form-control" placeholder="Имя пользователя"/>
-                    </div>
+                <div class="login-inputs">
+                    <input type="text" name="username" placeholder="Имя пользователя"/>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Пароль:</label>
-                    <div class="col-sm-6">
-                        <input type="password" name="password" class="form-control" placeholder="Пароль"/>
-                    </div>
+                <div class="login-inputs">
+                    <input type="password" name="password" placeholder="Пароль" autocomplete="new-password"/>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <button class="btn btn-secondary btn-sm"
-                        type="submit"><#if isRegisterForm>Зарегистрироваться<#else>Войти</#if></button>
-                <div class="form-group row">
-                    <label class="col-sm-5 col-form-label"></label>
-                    <div class="row gy-5">
-                        <#if !isRegisterForm><a href="/registration">Регистрация</a></#if>
-                    </div>
+                <button type="submit" class="btn" style="margin-top: 10px" onclick="checkInputs()">
+                    <#if isRegisterForm>Зарегистрироваться<#else>Войти</#if>
+                </button>
+                <div class="login-registration-link">
+                    <#if !isRegisterForm>Еще не зарегестрированы? <a href="/registration">Регистрация</a></#if>
                 </div>
             </form>
         </div>
+
     </div>
 </#macro>
 
-<#macro logout>
+<#macro logoutBut>
     <form action="/logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button class="btn btn-secondary btn-sm" type="submit">Выйти</button>
+        <button class="btn" type="submit">Выйти</button>
     </form>
+</#macro>
+
+
+<#macro loginBut>
+    <a href="/login" class="btn">Войти</a>
 </#macro>

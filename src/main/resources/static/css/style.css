@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: rgba(217, 204, 193, 0.73);
+}
+
+/*ВЕРХНЯЯ НАВИГАЦИОННАЯ ПАНЕЛЬ*/
+.header-controls {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 1%;
+    background: #fd9334;
+    border-radius: 5px;
+}
+
+.header-left-controls {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+    color: black;
+}
+
+.header-right-controls {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    color: black;
+}
+
+.header-menu {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 10%;
+}
+
+.header-address {
+    width: 20%;
+}
+
+.header-search {
+    width: 70%;
+}
+
+.header-search i.fa {
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    margin-right: -26px;
+    position: relative;
+    z-index: 1;
+    float: left;
+    padding: 5px 0 5px 0;
+}
+
+.header-search input {
+    outline: none;
+    width: 90%;
+    padding: 10px 0 10px 30px;
+    background: rgb(217, 204, 193);
+
+    font-family: inherit;
+    border-radius: 0.5rem;
+    border: 1px solid #bdbdbd;
+}
+
+.header-user {
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80px;
+    cursor: pointer;
+    color: #44413b;
+}
+
+.header-user i {
+    margin: 0 10px 0 10px;
+}
+
+.header-basket {
+    text-decoration: none;
+    cursor: pointer;
+    color: #44413b;
+    width: 80px;
+    text-align: center;
+}
+
+/*ДЛЯ ТЕЛЕФОНОВ 375PX
+ВЕРХНЯЯ ПАНЕЛЬ ПРАКТИЧЕСКИ ПОЛНОСТЬЮ УБИРАЕТСЯ
+ОСТАЕТСЯ СТРОКА ПОИСКА
+*/
+@media (max-width: 376px) {
+    .header-controls {
+        width: 100%;
+    }
+
+    .header-left-controls {
+        width: 100%;
+    }
+
+    .header-right-controls {
+        display: none;
+    }
+
+    .header-menu {
+        display: none;
+    }
+
+    .header-address {
+        display: none;
+    }
+
+    .header-search {
+        width: 100%;
+    }
+
+    .header-search input {
+        margin-right: 10px;
+    }
+}
+
+/*КНОПКА БАЗОВАЯ*/
+.btn {
+    outline: none;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+
+    margin: 0 20px 0 20px;
+    padding: 8px;
+
+    border: solid 1px transparent;
+    border-radius: 4px;
+    color: #44413b;
+    background-color: #ebc686;
+}
+
+.btn:hover,
+.btn:focus {
+    color: #ebc686;
+    border-color: currentColor;
+    background-color: #44413b;
+}
+
+/*АВТОРИЗАЦИЯ*/
+.login-block-background {
+    position: fixed;
+    display: flex;
+    left: 0;
+    top: 0;
+    background: rgba(150, 147, 147, 0.52);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 100;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-block {
+    box-shadow: 10px 10px 30px rgb(217, 204, 193);
+    border-radius: 10px;
+    background: rgb(217, 204, 193);
+    width: 400px;
+    height: 330px;
+    margin: 0 20px 0 20px;
+    font-size: 18px;
+    padding: 20px 5px 20px 5px;
+}
+
+.login-title {
+    font-size: 25px;
+    margin: 30px 0 30px 0;
+}
+
+.login-inputs input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: rgb(217, 204, 193);
+    margin: 10px 0 20px 0;
+    font-size: 18px;
+}
+
+@-webkit-keyframes autofill {
+    0%, 100% {
+        color: #666;
+        background: transparent;
+    }
+}
+
+.login-inputs input:active,
+.login-inputs input:focus,
+.login-inputs input:-webkit-autofill {
+    outline: none;
+    border: none;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    background-color: rgb(217, 204, 193) !important;
+    -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+    -webkit-box-shadow: inset 0 0 0 50px rgb(217, 204, 193) !important;
+}
+
+.login-registration-link {
+    margin: 20px 0 0 0;
+    font-size: 15px;
+}
+
+.login-registration-link a {
+    color: #fd9334;
+}
+
+/*МЕНЮШКА*/
+.side-panel {
+    left: 0;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    background: rgba(152, 151, 151, 0.2);
+    width: 100%;
+    height: 100vh;
+    transition: all 0.5s;
+}
+
+.side-panel.hide {
+    left: -100%;
+}
+
+.menu-panel {
+    background: #fd9334;
+    width: 320px;
+    height: 100vh;
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.4);
+    color: #FFF;
+    padding: 40px 20px;
+}
+
+.menu-close-but {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    width: 20%;
+    text-align: right;
+    padding-right: 20px;
+    color: #44413b;
+}
+
+.menu-profile-and-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.menu-items-block {
+    padding: 30px 20px 0 20px;
+}
+
+.menu-item {
+    padding: 10px 0 10px 0;
+}
+
+.menu-item a {
+    outline: none;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.menu-item a:hover {
+    color: #44413b;
+}
