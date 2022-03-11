@@ -40,10 +40,14 @@ public class UserController {
     @PostMapping
     public String userSave(
             @RequestParam String username,
+            @RequestParam String phoneNumber,
+            @RequestParam String email,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
         user.setUsername(username);
+        user.setPhoneNumber(phoneNumber);
+        user.setEmail(email);
 
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
