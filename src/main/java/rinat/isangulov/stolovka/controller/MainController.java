@@ -13,4 +13,14 @@ public class MainController {
         return "greeting";
     }
 
+    @GetMapping("/basket")
+    public String basket(Map<String, Object> model) {
+        return "basket";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Map<String, Object> model) {
+        return "profile";
+    }
+
 }
