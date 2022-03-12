@@ -18,9 +18,4 @@ public class MainController {
         return "basket";
     }
 
-    @GetMapping("/profile")
-    public String profile(Map<String, Object> model) {
-        return "profile";
-    }
-
 }
