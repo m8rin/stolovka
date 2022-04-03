@@ -3,11 +3,11 @@
     <div class="side-panel hide" id="side-panel">
         <div class="menu-panel">
             <div class="menu-profile-and-button">
-                <a class="header-user" href="/">
+                <a class="header-user" href="/profile">
                     <i class="fa fa-user fa-2x" aria-hidden="true"></i>
                     <div>${name}</div>
                 </a>
-                <button class="menu-close-but" onclick="hidePanel()">
+                <button class="menu-close-but" onclick="hideBlock('side-panel')">
                     <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 </button>
             </div>

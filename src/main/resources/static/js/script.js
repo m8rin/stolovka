@@ -3,16 +3,11 @@ document.onclick = function (e) {
         document.getElementById("login-block-background").style.display = "none";
     }
     if (e.target.className === "side-panel") {
-        hidePanel();
+        hideBlock("side-panel");
     }
 };
 
-function hidePanel() {
-    const panel = document.getElementById("side-panel");
-    panel.classList.toggle("hide");
-}
-
-function checkInputs() {
-    const inp1 = document.getElementsByName("password");
-    console.log(inp1);
+function hideBlock(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle("hide");
 }
