@@ -19,4 +19,10 @@ public class DishController {
         return "dishesList";
     }
 
+    @GetMapping("/")
+    public String menu(Model model) {
+        model.addAttribute("dishes", dishRepository.findAll());
+
+        return "dishesList";
+    }
 }

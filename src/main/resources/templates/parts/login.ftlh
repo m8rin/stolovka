@@ -10,11 +10,14 @@
                     <input type="password" name="password" placeholder="Пароль" autocomplete="new-password"/>
                 </div>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <button type="submit" class="btn" style="margin-top: 10px" onclick="checkInputs()">
+                <button type="submit" class="btn" style="margin-top: 10px">
                     <#if isRegisterForm>Зарегистрироваться<#else>Войти</#if>
                 </button>
                 <div class="login-registration-link">
                     <#if !isRegisterForm>Еще не зарегестрированы? <a href="/registration">Регистрация</a></#if>
+                </div>
+                <div class="message">
+                    ${message!}
                 </div>
             </form>
         </div>
@@ -25,7 +28,7 @@
 <#macro logoutBut>
     <form action="/logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-        <button class="btn" type="submit">Выйти</button>
+        <button class="btn2" type="submit">Выйти из профиля</button>
     </form>
 </#macro>
 

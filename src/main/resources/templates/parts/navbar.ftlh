@@ -4,7 +4,7 @@
 
 <div class="header-controls">
     <div class="header-left-controls">
-        <button class="header-menu" onclick="hidePanel()">
+        <button class="header-menu" onclick="hideBlock('side-panel')">
             <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
         </button>
         <div class="header-address">
@@ -24,15 +24,17 @@
                 <div>${name}</div>
                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
             </a>
+            <a class="header-basket" href="/basket">
+                <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
+            </a>
         <#else>
             <a class="header-user" href="/login">
                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
             </a>
+            <a class="header-basket readonly">
+                <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
+            </a>
         </#if>
-        <a class="header-basket" href="/basket">
-            <i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i>
-        </a>
-
     </div>
 </div>
 
@@ -51,4 +53,3 @@
 
 </div>
 -->
-<@l.logoutBut/>
