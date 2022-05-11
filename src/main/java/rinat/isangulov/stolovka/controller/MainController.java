@@ -13,4 +13,8 @@ public class MainController {
         return "basket";
     }
 
+    @GetMapping("/map")
+    public String map() {
+        return "map";
+    }
 }

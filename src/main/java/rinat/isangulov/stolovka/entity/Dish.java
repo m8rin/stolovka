@@ -12,6 +12,7 @@ public class Dish {
     private String code;
     private String name;
     private float price;
+    private String category;
 
     public Dish() {}
 
@@ -19,6 +20,21 @@ public class Dish {
         this.code = code;
         this.name = name;
         this.price = price;
+    }
+
+    public Dish(String code, String name, float price, String category) {
+        this.code = code;
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -43,6 +59,14 @@ public class Dish {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
