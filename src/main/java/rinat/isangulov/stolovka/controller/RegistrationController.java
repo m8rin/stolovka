@@ -35,6 +35,7 @@ public class RegistrationController {
         user.setRoles(Collections.singleton(Role.USER));
         user.setPhoneNumber("Не заполнен");
         user.setEmail("Не заполнен");
+        user.setCount(0);
         userRepository.save(user);
 
         return "redirect:/login";
