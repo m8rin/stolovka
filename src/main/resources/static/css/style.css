@@ -98,8 +98,18 @@ body {
     color: #44413b;
     width: 80px;
     text-align: center;
+    position: relative;
 }
-
+.header-count-on-basket{
+    position: absolute;
+    right: 20px;
+    bottom: -10px;
+    background: rgb(228, 0, 43);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: white;
+}
 /*ДЛЯ ТЕЛЕФОНОВ 375PX
 ВЕРХНЯЯ ПАНЕЛЬ ПРАКТИЧЕСКИ ПОЛНОСТЬЮ УБИРАЕТСЯ
 ОСТАЕТСЯ СТРОКА ПОИСКА
@@ -630,6 +640,7 @@ body {
 /*КОРЗИНА*/
 .basket-page{
     margin: 2%;
+    padding-bottom: 50px;
 }
 .basket-title{
     font-size: 3rem;

@@ -47,7 +47,7 @@ public class BasketController {
     }
 
     @PostMapping("/addDishToBasket")
-    public String dishSave(@RequestParam Long dishId, Model model) {
+    public String dishSave(@AuthenticationPrincipal User currentUser, @RequestParam Long dishId, Model model) {
         Dish dish = dishRepository.findDishById(dishId);
 
         if (DISH_REPOSITORY_MAP.containsKey(dishId)) {
@@ -77,11 +77,13 @@ public class BasketController {
         orderRepository.save(order);
 
         model.addAttribute("dishes", DISH_REPOSITORY);
+        int currentCount = currentUser.getCount();
+        currentUser.setCount(++currentCount);
         return "redirect:/";
     }
 
     @PostMapping("/addOrder")
-    public String addOrder(Model model) {
+    public String addOrder(@AuthenticationPrincipal User currentUser, Model model) {
         ORDER_REPOSITORY.addAll(DISH_REPOSITORY);
         DISH_REPOSITORY.clear();
         DISH_REPOSITORY_MAP.clear();
@@ -100,6 +102,13 @@ public class BasketController {
         model.addAttribute("dishes", ORDER_REPOSITORY);
         model.addAttribute("orderCode", orderCode);
         model.addAttribute("orderStatus", orderStatus);
+        Order order = orderRepository.findOrderByCode("01");
+        if (order != null) {
+            order.setCost("0");
+            order.setActive(true);
+            orderRepository.save(order);
+        }
+        currentUser.setCount(0);
         return "orderAccept";
     }
 
