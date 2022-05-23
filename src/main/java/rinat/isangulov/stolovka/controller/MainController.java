@@ -8,10 +8,10 @@ import java.util.Map;
 @Controller
 public class MainController {
 
-    @GetMapping("/basket")
+   /* @GetMapping("/basket")
     public String basket(Map<String, Object> model) {
         return "basket";
-    }
+    }*/
 
     @GetMapping("/map")
     public String map() {

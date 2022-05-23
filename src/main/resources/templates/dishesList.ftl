@@ -2,9 +2,12 @@
 <@c.page>
     <div class="dish-categories">
         <div class="category selected">Популярное</div>
-        <div class="category">Супы</div>
-        <div class="category">Вторые блюда</div>
+        <div class="category">Первые</div>
+        <div class="category">Вторые</div>
+        <div class="category">Гарниры</div>
         <div class="category">Напитки</div>
+        <div class="category">Холодные</div>
+        <div class="category">Десерты</div>
         <div class="category">Другое</div>
     </div>
     <div class="dishes-page">
@@ -16,7 +19,13 @@
                 </div>
                 <div class="dish-info">
                     <div class="dish-price">${dish.price} ₽</div>
-                    <button class="btn-add-dish-to-basket" style="font-weight: lighter"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    <#--    Изменения С1-->
+                    <form action="/addDishToBasket" method="post">
+                        <input type="hidden" value="${dish.id}" name="dishId">
+                        <input type="hidden" value="${_csrf.token}" name="_csrf">
+                        <button type="submit" class="btn-add-dish-to-basket" style="font-weight: lighter"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    </form>
+                    <#--    Изменения С1-->
                 </div>
             </div>
         </#list>

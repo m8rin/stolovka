@@ -1,4 +1,4 @@
-<#--<#include "security.ftlh">-->
+<#include "security.ftlh">
 <#macro panel>
     <div class="side-panel hide" id="side-panel">
         <div class="menu-panel">
@@ -21,9 +21,13 @@
                 <div class="menu-item">
                     <a href="/map">Мы на карте</a>
                 </div>
-                <div class="menu-item">
-                    <a href="/">Меню</a>
-                </div>
+                <#--    Изменения С1-->
+                <#if isAdmin>
+                    <div class="menu-item">
+                        <a href="/editDishes">Редактирование меню</a>
+                    </div>
+                </#if>
+                <#--    Изменения С1-->
             </div>
 
         </div>

@@ -33,6 +33,13 @@ public class DishController {
         return "dishesList";
     }
 
+    @GetMapping("/editDishes")
+    public String menuForEdit(Model model) {
+        model.addAttribute("dishes", dishRepository.findAll());
+
+        return "dishesListForEdit";
+    }
+
     @GetMapping("/dish/{dish}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String dishEditForm(@PathVariable Dish dish, Model model) {
@@ -47,15 +54,17 @@ public class DishController {
     @PostMapping("/dish")
     public String dishSave(
             @RequestParam String name,
-            @RequestParam float price,
+            @RequestParam String price,
             @RequestParam String category,
             @RequestParam("dishId") Dish dish
     ) {
         dish.setName(name);
         dish.setPrice(price);
         dish.setCategory(category);
+        dish.setCount(1);
 
         dishRepository.save(dish);
-        return "redirect:/";
+        return "redirect:/editDishes";
     }
+
 }

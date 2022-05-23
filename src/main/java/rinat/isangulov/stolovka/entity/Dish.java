@@ -17,8 +17,9 @@ public class Dish {
     private Long id;
     private String code;
     private String name;
-    private float price;
+    private String price;
     private String category;
+    private int count;
     //private int countInOrder;
 
     @Getter
@@ -28,13 +29,13 @@ public class Dish {
 
     public Dish() {}
 
-    public Dish(String code, String name, float price) {
+    public Dish(String code, String name, String price) {
         this.code = code;
         this.name = name;
         this.price = price;
     }
 
-    public Dish(String code, String name, float price, String category) {
+    public Dish(String code, String name, String price, String category) {
         this.code = code;
         this.name = name;
         this.price = price;
@@ -65,11 +66,11 @@ public class Dish {
         this.code = code;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -88,6 +89,14 @@ public class Dish {
     public void setCountInOrder(int countInOrder) {
         this.countInOrder = countInOrder;
     }*/
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     @Override
     public String toString() {

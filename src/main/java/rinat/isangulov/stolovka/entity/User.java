@@ -1,7 +1,5 @@
 package rinat.isangulov.stolovka.entity;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,11 +23,6 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
-    @Getter
-    @Setter
-    @OneToMany(mappedBy = "primaryUser", fetch = FetchType.EAGER)
-    private Collection<Order> userOrdersList;
 
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
