@@ -5,4 +5,6 @@ import rinat.isangulov.stolovka.entity.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
     Order findOrderByCode(String code);
+
+    Order findOrderById(Long id);
 }

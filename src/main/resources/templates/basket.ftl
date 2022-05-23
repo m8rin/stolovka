@@ -16,6 +16,9 @@
             </div>
         </#list>
     </div>
-    <button type="submit" class="btn" style="margin-top: 100px">Оформить заказ</button>
-<#--    Изменения С1-->
+    <p>${totalSum!"0"}</p>
+    <form action="/addOrder" method="post">
+        <input type="hidden" value="${_csrf.token}" name="_csrf">
+        <button type="submit" class="btn" style="margin-top: 100px">Оформить заказ</button>
+    </form>
 </@c.page>

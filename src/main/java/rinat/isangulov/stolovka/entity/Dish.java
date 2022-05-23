@@ -14,14 +14,9 @@ public class Dish {
     private String price;
     private String category;
     private int count;
-    //private int countInOrder;
 
-    @Getter
-    @Setter
-    @ManyToMany(mappedBy = "dishesOrderList")
-    private Collection<Order> dishes;
-
-    public Dish() {}
+    public Dish() {
+    }
 
     public Dish(String code, String name, String price) {
         this.code = code;

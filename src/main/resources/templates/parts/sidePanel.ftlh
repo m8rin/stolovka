@@ -21,13 +21,14 @@
                 <div class="menu-item">
                     <a href="/map">Мы на карте</a>
                 </div>
-                <#--    Изменения С1-->
+                <div class="menu-item">
+                    <a href="/orders">Заказы</a>
+                </div>
                 <#if isAdmin>
                     <div class="menu-item">
                         <a href="/editDishes">Редактирование меню</a>
                     </div>
                 </#if>
-                <#--    Изменения С1-->
             </div>
 
         </div>
