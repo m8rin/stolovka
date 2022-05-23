@@ -20,6 +20,10 @@
     </div>
     <div class="header-right-controls">
         <#if known>
+            <a class="header-user" href="/">
+                <div>${count!0}</div>
+                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+            </a>
             <a class="header-user" href="/profile">
                 <div>${name}</div>
                 <i class="fa fa-user fa-2x" aria-hidden="true"></i>
