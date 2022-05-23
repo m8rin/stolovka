@@ -1,6 +1,12 @@
 package rinat.isangulov.stolovka.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.aspectj.weaver.ast.Or;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "dishes")
@@ -13,6 +19,12 @@ public class Dish {
     private String name;
     private float price;
     private String category;
+    //private int countInOrder;
+
+    @Getter
+    @Setter
+    @ManyToMany(mappedBy = "dishesOrderList")
+    private Collection<Order> dishes;
 
     public Dish() {}
 
@@ -68,6 +80,14 @@ public class Dish {
     public void setCategory(String category) {
         this.category = category;
     }
+/*
+    public int getCountInOrder() {
+        return countInOrder;
+    }
+
+    public void setCountInOrder(int countInOrder) {
+        this.countInOrder = countInOrder;
+    }*/
 
     @Override
     public String toString() {
