@@ -12,20 +12,23 @@
                 </button>
             </div>
             <div class="menu-items-block">
-                <div class="menu-item">
+                <div class="menu-item img-menu"onclick="window.location.replace('/')">
                     <a href="/">Меню</a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item img-profile" onclick="window.location.replace('/profile')">
                     <a href="/profile">Профиль</a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item img-basket" onclick="window.location.replace('/basket')">
+                    <a href="/basket">Корзина</a>
+                </div>
+                <div class="menu-item img-map" onclick="window.location.replace('/map')">
                     <a href="/map">Мы на карте</a>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item img-orders" onclick="window.location.replace('/orders')">
                     <a href="/orders">Заказы</a>
                 </div>
                 <#if isAdmin>
-                    <div class="menu-item">
+                    <div class="menu-item admin-item" onclick="window.location.replace('/editDishes')">
                         <a href="/editDishes">Редактирование меню</a>
                     </div>
                 </#if>
