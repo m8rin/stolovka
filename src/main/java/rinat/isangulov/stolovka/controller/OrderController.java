@@ -49,7 +49,7 @@ public class OrderController {
     ) {
         order.setCode(code);
         order.setActive(true);
-        order.setDishesOrderList(dishesList);
+        //order.setDishesOrderList(dishesList);
 
         orderRepository.save(order);
 
@@ -65,7 +65,7 @@ public class OrderController {
         Collection dishesList = new ArrayList();
         dishesList.add(dishRepository.findDishByCode("11078"));
         dishesList.add(dishRepository.findDishByCode("10446"));
-        order.setDishesOrderList(dishesList);
+        //order.setDishesOrderList(dishesList);
 
         orderRepository.save(order);
 

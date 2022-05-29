@@ -789,6 +789,61 @@ body {
         align-self: flex-start;
     }
 }
+
+/*Заказ пользователя*/
+.user-order{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+}
+.user-order-block{
+    text-align: center;
+    margin: 20px 0 0 0;
+    padding: 0 20px 30px 20px;
+    background: white;
+    width: 40%;
+    border-radius: 20px;
+
+}
+.user-order-number{
+    font-size: 2rem;
+    margin: 20px 0 20px 0;
+}
+.user-order-statuses{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0 30px 0;
+}
+.user-order-status{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.user-order-status i{
+    font-size: 2rem;
+}
+.inactive-status{
+    color: #bdbdbd;
+}
+.user-order-list-title{
+    text-align: left;
+    font-size: 1.3rem;
+    border-bottom: 1px solid rgba(68, 65, 59, 0.78);
+}
+.user-order-list-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
 /*уведомления*/
 .message {
     font-size: 14px;
