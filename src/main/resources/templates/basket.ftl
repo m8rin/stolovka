@@ -2,7 +2,7 @@
 <@c.page>
 <#--    Изменения С1-->
     <div class="basket-page">
-        <div class="basket-title">
+        <div class="main-title">
             Корзина
         </div>
 

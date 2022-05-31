@@ -18,14 +18,11 @@
                     ${dish.name}
                 </div>
                 <div class="dish-info">
-                    <div class="dish-price">${dish.price} ₽</div>
-                    <#--    Изменения С1-->
                     <form action="/addDishToBasket" method="post">
                         <input type="hidden" value="${dish.id}" name="dishId">
                         <input type="hidden" value="${_csrf.token}" name="_csrf">
-                        <button type="submit" class="btn-add-dish-to-basket" style="font-weight: lighter"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <button type="submit" class="btn-add-dish-to-basket">${dish.price} ₽</button>
                     </form>
-                    <#--    Изменения С1-->
                 </div>
             </div>
         </#list>
