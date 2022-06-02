@@ -2,11 +2,16 @@
 <@c.page>
     <div class="dish-edit">
         <div class="main-title">Редактирование блюда</div>
-        <form action="/dish" method="post">
+        <form action="/dish" method="post" enctype="multipart/form-data">
             <div class="input-container">
-                <input class="input" type="text" name="img" value="${dish.img!"Не задана"}" placeholder=" "/>
-                <div class="cut"></div>
-                <label class="placeholder">Название изображения</label>
+                <input type="file" name="file">
+            </div>
+            <div class="input-container">
+                <#if dish.imgURL??>
+                    <img class="dish-img" src="${dish.imgURL!""}" alt="dish">
+                <#else>
+                    <img class="dish-img" src="/static/img/food.png" alt="dish">
+                </#if>
             </div>
             <div class="input-container">
                 <input class="input" type="text" name="name" value="${dish.name}" placeholder=" "/>
