@@ -4,6 +4,11 @@
         <div class="main-title">Редактирование блюда</div>
         <form action="/dish" method="post">
             <div class="input-container">
+                <input class="input" type="text" name="img" value="${dish.img!"Не задана"}" placeholder=" "/>
+                <div class="cut"></div>
+                <label class="placeholder">Название изображения</label>
+            </div>
+            <div class="input-container">
                 <input class="input" type="text" name="name" value="${dish.name}" placeholder=" "/>
                 <div class="cut"></div>
                 <label class="placeholder">Название</label>

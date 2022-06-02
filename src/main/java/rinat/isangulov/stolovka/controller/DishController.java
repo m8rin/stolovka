@@ -56,12 +56,14 @@ public class DishController {
             @RequestParam String name,
             @RequestParam String price,
             @RequestParam String category,
+            @RequestParam String img,
             @RequestParam("dishId") Dish dish
     ) {
         dish.setName(name);
         dish.setPrice(price);
         dish.setCategory(category);
         dish.setCount(1);
+        dish.setImg(img);
 
         dishRepository.save(dish);
         return "redirect:/editDishes";

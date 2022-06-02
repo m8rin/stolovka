@@ -13,6 +13,7 @@ public class Dish {
     private String name;
     private String price;
     private String category;
+    private String img;
     private int count;
 
     public Dish() {
@@ -85,6 +86,14 @@ public class Dish {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     @Override
