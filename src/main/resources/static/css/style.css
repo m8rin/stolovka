@@ -935,9 +935,45 @@ body {
 
 .input:focus ~ .placeholder {
     color: #c76817;
-}
+}/*__________________________*/
 
-/*__________________________*/
+/*ИСТОРИЯ ЗАКАЗОВ*/
+.ordersList{
+    margin: 20px 1% 20px 1%;
+}
+.orderList-items{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.orderList-item{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+    height: 80px;
+    border-bottom: 1px solid #44413b;
+}
+.order-item-icon{
+    font-size: 3rem;
+    color: #ebc686;
+}
+.order-item-info{
+    font-size: 1.5rem;
+}
+.order-item-date{
+    color: #ad9a8e;
+}
+.order-item-price{
+    font-size: 1.8rem;
+    color: rgb(228, 0, 43);
+}
+.green{
+    color: green;
+}
 /*уведомления*/
 .message {
     font-size: 14px;
