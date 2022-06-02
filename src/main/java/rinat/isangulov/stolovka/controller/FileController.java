@@ -1,14 +1,20 @@
 package rinat.isangulov.stolovka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import rinat.isangulov.stolovka.entity.Dish;
+import rinat.isangulov.stolovka.entity.FileEntity;
 import rinat.isangulov.stolovka.repository.DishRepository;
+import rinat.isangulov.stolovka.service.FileService;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +23,13 @@ public class FileController {
 
     @Autowired
     private DishRepository dishRepository;
+
+    @Autowired
+    private final FileService fileService;
+
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     @GetMapping("/fill")
     public String fillMenu(Model model) {
@@ -100,6 +113,23 @@ public class FileController {
                 System.out.println("Добавлено новое блюдо:\n" + dish);
             }
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/files/{id}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+        Optional<FileEntity> fileEntityOptional = fileService.getFile(id);
+
+        if (fileEntityOptional.isEmpty()) {
+            return ResponseEntity.notFound()
+                    .build();
+        }
+
+        FileEntity fileEntity = fileEntityOptional.get();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileEntity.getName() + "\"")
+                .contentType(MediaType.valueOf(fileEntity.getContentType()))
+                .body(fileEntity.getData());
     }
 
 }

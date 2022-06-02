@@ -27,6 +27,9 @@ public class DishController {
     @Autowired
     private DishRepository dishRepository;
 
+    @Autowired
+    private final FileService fileService;
+
     public DishController(FileService fileService) {
         this.fileService = fileService;
     }
@@ -63,9 +66,6 @@ public class DishController {
         return "dishEdit";
     }
 
-    @Autowired
-    private final FileService fileService;
-
     @PostMapping("/dish")
     public String dishSave(
             @RequestParam String name,
@@ -84,17 +84,19 @@ public class DishController {
             fileService.save(file);
             dish.setImg(file.getOriginalFilename());
             dish.setImgURL(mapToFileResponse(fileService.getLast()).getUrl());
+
         } catch (Exception ignored) {
+            System.out.println("Не удалось загрузить файл: " + file.getOriginalFilename());
         }
 
         dishRepository.save(dish);
-        return "redirect:/dish/" + dish.getId();
+        return "redirect:/dish/"+ dish.getId();
     }
 
     private FileResponse mapToFileResponse(FileEntity fileEntity) {
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/files/")
-                .path(fileEntity.getId())
+                .path(fileEntity.getName())
                 .toUriString();
 
         FileResponse fileResponse = new FileResponse();
