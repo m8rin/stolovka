@@ -14,6 +14,7 @@ public class Dish {
     private String price;
     private String category;
     private String img;
+    private String imgURL;
     private int count;
 
     public Dish() {
@@ -94,6 +95,14 @@ public class Dish {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     @Override

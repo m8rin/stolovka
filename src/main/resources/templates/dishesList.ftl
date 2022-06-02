@@ -13,8 +13,8 @@
     <div class="dishes-page">
         <#list dishes as dish>
             <div class="dish-block">
-                <#if dish.img??>
-                    <img class="dish-img" src="/static/img/${dish.img}" alt="dish">
+                <#if dish.imgURL??>
+                    <img class="dish-img" src="${dish.imgURL!""}" alt="dish">
                 <#else>
                     <img class="dish-img" src="/static/img/food.png" alt="dish">
                 </#if>
