@@ -96,7 +96,7 @@ public class DishController {
     private FileResponse mapToFileResponse(FileEntity fileEntity) {
         String downloadURL = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/files/")
-                .path(fileEntity.getName())
+                .path(fileEntity.getId())
                 .toUriString();
 
         FileResponse fileResponse = new FileResponse();
