@@ -11,3 +11,8 @@ function hideBlock(id) {
     const block = document.getElementById(id);
     block.classList.toggle("hide");
 }
+
+function hideOrderDishes(e){
+    const child = e.querySelector('.admin-orders-item-dishes');
+    child.classList.toggle("hidden");
+}
