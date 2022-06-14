@@ -31,6 +31,9 @@
                     <div class="menu-item admin-item" onclick="window.location.replace('/editDishes')">
                         <a href="/editDishes">Редактирование меню</a>
                     </div>
+                    <div class="menu-item admin-item" onclick="window.location.replace('/editDishes')">
+                        <a href="/orderAdministration">Работа с заказами</a>
+                    </div>
                 </#if>
             </div>
 

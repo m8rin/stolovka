@@ -935,14 +935,83 @@ body {
 
 .input:focus ~ .placeholder {
     color: #c76817;
+}/*__________________________*/
+
+/*ИСТОРИЯ ЗАКАЗОВ*/
+.ordersList{
+    margin: 20px 1% 20px 1%;
+}
+.orderList-items{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.orderList-item{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+    height: 80px;
+    border-bottom: 1px solid #44413b;
+}
+.order-item-icon{
+    font-size: 3rem;
+    color: #ebc686;
+}
+.order-item-info{
+    font-size: 1.5rem;
+}
+.order-item-date{
+    color: #ad9a8e;
+}
+.order-item-price{
+    font-size: 1.8rem;
+    color: #44413b;
+}
+.green{
+    color: green;
+
 }
 
-/*__________________________*/
+.admin-orders{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+}
+.admin-orders-item{
+    cursor: pointer;
+    text-align: center;
+}
+.admin-orders-item-header{
+    height: 50px;
+    border: 1px solid rgba(68, 65, 59, 0.78);
+}
+.admin-orders-item-dishes{
+    border: 1px solid rgba(68, 65, 59, 0.78);
+}
+.hidden{
+    display: none;
+}
+
+.active-order .admin-orders-item-header,
+.active-order .admin-orders-item-dishes{
+    background: yellow;
+}
+.done-order .admin-orders-item-header,
+.done-order .admin-orders-item-dishes{
+    background: green;
+}
+
 /*уведомления*/
 .message {
     font-size: 14px;
     color: rgba(250, 0, 20, 0.78);
 }
+
 
 /*класс для неактивных ссылок*/
 .readonly {

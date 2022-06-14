@@ -26,6 +26,13 @@ public class OrderController {
     @Autowired
     private DishRepository dishRepository;
 
+
+    @GetMapping("/orderAdministration")
+    public String orderAdministration(Model model) {
+        model.addAttribute("orders", orderRepository.findAll());
+
+        return "orderAdministration";
+    }
     @GetMapping("/orders")
     public String ordersList(Model model) {
         model.addAttribute("orders", orderRepository.findAll());
