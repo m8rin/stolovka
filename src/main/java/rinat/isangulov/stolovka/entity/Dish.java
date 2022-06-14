@@ -1,6 +1,7 @@
 package rinat.isangulov.stolovka.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "dishes")
@@ -16,6 +17,9 @@ public class Dish {
     private String img;
     private String imgURL;
     private int count;
+
+    @ManyToMany(mappedBy = "order_dishes")
+    private List<Order> orders;
 
     public Dish() {
     }

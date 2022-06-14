@@ -17,7 +17,7 @@
             </div>
             <div class="profile-info">
                 <div class="info-name">E-mail:</div>
-                <div class="info">xxxxx</div>
+                <div class="info">${user.email!"Не введен"}</div>
             </div>
             <div class="profile-info">
                 <div class="info-name">Дата рождения:</div>

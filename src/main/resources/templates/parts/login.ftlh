@@ -1,14 +1,24 @@
 <#macro login path isRegisterForm>
     <div class="login-block-background" id="login-block-background">
         <div class="login-block">
-            <div class="login-title">Авторизация</div>
+            <#if !isRegisterForm>
+                <div class="login-title">Авторизация</div>
+            <#else>
+                <div class="login-title">Регистрация</div>
+            </#if>
+
             <form action="${path}" method="post">
                 <div class="login-inputs">
-                    <input type="text" name="username" placeholder="Имя пользователя"/>
+                    <input type="text" name="username" placeholder="Логин"/>
                 </div>
                 <div class="login-inputs">
                     <input type="password" name="password" placeholder="Пароль" autocomplete="new-password"/>
                 </div>
+                <#if isRegisterForm>
+                    <div class="login-inputs">
+                        <input type="password" placeholder="Повторите пароль" autocomplete="new-password"/>
+                    </div>
+                </#if>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <button type="submit" class="btn" style="margin-top: 10px">
                     <#if isRegisterForm>Зарегистрироваться<#else>Войти</#if>

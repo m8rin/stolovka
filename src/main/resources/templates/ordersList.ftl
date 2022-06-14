@@ -12,8 +12,8 @@
         <#list orders as order>
             <tr>
                 <td>${order?index + 1}</td>
-                <td>${order.code}</td>
-                <td>${order.price}</td>
+                <td>${order.code!!}</td>
+                <td>${order.price!!}</td>
             </tr>
         </#list>
         </tbody>
