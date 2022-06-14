@@ -7,32 +7,34 @@
         </div>
 
         <div>
-            <#list dishes as dish>
-                <div class="basket-dish-item">
-                    <div class="basket-item-img-name">
-                        <img class="basket-item-img" src="/static/img/food.png" alt="dish">
-                        <div class="basket-item-name">
-                            ${dish.name!}
-                        </div>
-                    </div>
-                    <div class="basket-item-price">
-                        ${dish.price!} ₽
-                    </div>
-                    <div class="basket-item-count">
-                        <div class="basket-item-count-block">
-                            <button class="basket-item-count-minus minus">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                            <div class="basket-item-count-number">
-                                <span>1</span>
+            <#if dishes??>
+                <#list dishes as dish>
+                    <div class="basket-dish-item">
+                        <div class="basket-item-img-name">
+                            <img class="basket-item-img" src="/static/img/food.png" alt="dish">
+                            <div class="basket-item-name">
+                                ${dish.name!}
                             </div>
-                            <button class="basket-item-count-minus plus">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
+                        </div>
+                        <div class="basket-item-price">
+                            ${dish.price!} ₽
+                        </div>
+                        <div class="basket-item-count">
+                            <div class="basket-item-count-block">
+                                <button class="basket-item-count-minus minus">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                                <div class="basket-item-count-number">
+                                    <span>1</span>
+                                </div>
+                                <button class="basket-item-count-minus plus">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </#list>
+                </#list>
+            </#if>
             <div class="basket-dish-item" style="border-bottom: none">
                 <div class="basket-item-img-name">
                     <div class="basket-item-total-title">
@@ -40,7 +42,7 @@
                     </div>
                 </div>
                 <div class="basket-item-price total">
-                    ${totalSum!""}  ₽
+                    ${totalSum!""} ₽
                 </div>
                 <!--<button type="submit" class="btn">Оформить заказ</button>-->
                 <form action="/addOrder" method="post">
