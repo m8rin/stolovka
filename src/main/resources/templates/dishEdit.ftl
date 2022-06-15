@@ -6,11 +6,11 @@
             <div class="input-container">
                 <input type="file" name="file">
             </div>
-            <div class="input-container">
+            <div>
                 <#if dish.imgURL??>
-                    <img class="dish-img" src="${dish.imgURL!""}" alt="dish">
+                    <img class="dish-img" src="${dish.imgURL!""}" alt="dish" width="10%">
                 <#else>
-                    <img class="dish-img" src="/static/img/food.png" alt="dish">
+                    <img class="dish-img" src="/static/img/food.png" alt="dish"width="10%">
                 </#if>
             </div>
             <div class="input-container">
