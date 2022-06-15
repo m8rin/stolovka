@@ -13,6 +13,13 @@ function hideBlock(id) {
 }
 
 function hideOrderDishes(e){
-    const child = e.querySelector('.admin-orders-item-dishes');
+    let child = "";
+    if(e.classList[0] === "orderList-item"){
+        e.classList.toggle("border");
+        child = e.nextElementSibling;
+    }
+    else{
+        child = e.querySelector('.admin-orders-item-dishes');
+    }
     child.classList.toggle("hidden");
 }
