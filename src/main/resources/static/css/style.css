@@ -947,6 +947,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
 .orderList-item{
     display: flex;
     flex-direction: row;
@@ -956,6 +957,11 @@ body {
     width: 30%;
     height: 80px;
     border-bottom: 1px solid #44413b;
+}
+@media (max-width: 400px) {
+    .orderList-item {
+        width: 100%;
+    }
 }
 .order-item-icon{
     font-size: 3rem;
@@ -1024,4 +1030,10 @@ body {
     font-size: 3rem;
     font-weight: 900;
     line-height: 7.2rem;
+}
+@media (max-width: 400px){
+    .main-title{
+        font-size: 2rem;
+    }
+
 }
