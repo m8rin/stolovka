@@ -23,3 +23,14 @@ function hideOrderDishes(e){
     }
     child.classList.toggle("hidden");
 }
+
+function changeOrderStatus(e){
+    if(e.classList.contains("done-order")){
+        e.remove();
+    }
+    else if(e.classList.contains("active-order")){
+        e.classList.remove("active-order");
+        e.classList.add("done-order")
+    }
+
+}
