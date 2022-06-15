@@ -35,20 +35,7 @@ public class OrderController {
 
         return "orderAdministration";
     }
-    @GetMapping("/orders")
-    public String ordersList(@AuthenticationPrincipal User currentUser, Model model) {
-        model.addAttribute("orders", orderRepository.findAllByUserAndStatusNotContaining(currentUser, "NEW"));
 
-        return "ordersList";
-    }
-
-    @GetMapping("/orders/{order}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public String orderEditForm(@PathVariable Order order, Model model) {
-
-        model.addAttribute("order", order);
-        return "orderEdit";
-    }
 
     @PostMapping("/orders")
     public String orderSave(
