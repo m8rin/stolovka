@@ -1,17 +1,20 @@
 package rinat.isangulov.stolovka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import rinat.isangulov.stolovka.entity.*;
 import rinat.isangulov.stolovka.repository.DishRepository;
 import rinat.isangulov.stolovka.repository.OrderDishesRepository;
 import rinat.isangulov.stolovka.repository.OrderRepository;
+import rinat.isangulov.stolovka.repository.UserRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,6 +32,9 @@ public class BasketController {
 
     @Autowired
     private OrderDishesRepository orderDishesRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public User getCurrentUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -85,6 +91,12 @@ public class BasketController {
         if (!hasBasket) {
             addDishToOrderDishes(currentUser, dish, createBasketOrder(dish));
         }
+
+        // счетчик возле значка корзины
+        int basketDishesCount = getCurrentUser().getCount();
+        User user = getCurrentUser();
+        user.setCount(++basketDishesCount);
+        userRepository.save(user);
 
         return "redirect:/";
     }
@@ -190,7 +202,27 @@ public class BasketController {
             addDishesFromOrderToModel(order, model);
         }
 
+        // обнуление счетчика возле значка корзины
+        User user = getCurrentUser();
+        user.setCount(0);
+        userRepository.save(user);
+
         return "orderAccept";
     }
+
+    @GetMapping("/orders")
+    public String ordersList(@AuthenticationPrincipal User currentUser, Model model) {
+        model.addAttribute("orders", orderRepository.findAllByUserAndStatusNotContaining(currentUser, "NEW"));
+        return "ordersList";
+    }
+
+    @GetMapping("/orders/{order}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String orderEditForm(@PathVariable Order order, Model model) {
+
+        model.addAttribute("order", order);
+        return "orderEdit";
+    }
+
 
 }
