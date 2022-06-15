@@ -23,6 +23,7 @@ import java.util.*;
 public class BasketController {
 
     private static final String BASKET_CODE = "Basket";
+    private static final String PROCESSED_CODE = "Собирается";
 
     @Autowired
     private DishRepository dishRepository;
@@ -92,12 +93,6 @@ public class BasketController {
             addDishToOrderDishes(currentUser, dish, createBasketOrder(dish));
         }
 
-        // счетчик возле значка корзины
-        int basketDishesCount = getCurrentUser().getCount();
-        User user = getCurrentUser();
-        user.setCount(++basketDishesCount);
-        userRepository.save(user);
-
         return "redirect:/";
     }
 
@@ -141,6 +136,12 @@ public class BasketController {
             orderDishes.setCount(1);
             orderDishes.setCost(dish.getPrice());
             orderDishesRepository.save(orderDishes);
+
+            // счетчик возле значка корзины
+            int basketDishesCount = getCurrentUser().getCount();
+            User user = getCurrentUser();
+            user.setCount(++basketDishesCount);
+            userRepository.save(user);
         }
 
         //общая стоимость заказа
