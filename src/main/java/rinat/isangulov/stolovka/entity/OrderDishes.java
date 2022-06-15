@@ -9,7 +9,7 @@ public class OrderDishes {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int count;
-    private String cost;
+    private float cost;
     private boolean active;
     private Long dishId;
     private Long orderId;
@@ -30,11 +30,11 @@ public class OrderDishes {
         this.active = active;
     }
 
-    public String getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(float cost) {
         this.cost = cost;
     }
 

@@ -33,23 +33,27 @@
     </div>
 
 
-<#--    <table>-->
-<#--        <thead>-->
-<#--        <tr>-->
-<#--            <th>#</th>-->
-<#--            <th>Код</th>-->
-<#--            <th>Цена</th>-->
-<#--        </tr>-->
-<#--        </thead>-->
-<#--        <tbody>-->
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Код</th>
+            <th>Цена</th>
+            <th>Статус</th>
+            <th>Дата</th>
+        </tr>
+        </thead>
+        <tbody>
 
-<#--        <#list orders as order>-->
-<#--            <tr>-->
-<#--                <td>${order?index + 1}</td>-->
-<#--                <td>${order.code!!}</td>-->
-<#--                <td>${order.price!!}</td>-->
-<#--            </tr>-->
-<#--        </#list>-->
-<#--        </tbody>-->
-<#--    </table>-->
+        <#list orders as order>
+            <tr>
+                <td>${order?index + 1}</td>
+                <td>${order.code!}</td>
+                <td>${order.cost!}</td>
+                <td>${order.status!}</td>
+                <td>${order.date!}</td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
 </@c.page>

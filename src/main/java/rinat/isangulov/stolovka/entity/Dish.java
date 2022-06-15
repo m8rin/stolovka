@@ -12,7 +12,7 @@ public class Dish {
     private Long id;
     private String code;
     private String name;
-    private String price;
+    private float price;
     private String category;
     private String img;
     private String imgURL;
@@ -24,13 +24,13 @@ public class Dish {
     public Dish() {
     }
 
-    public Dish(String code, String name, String price) {
+    public Dish(String code, String name, float price) {
         this.code = code;
         this.name = name;
         this.price = price;
     }
 
-    public Dish(String code, String name, String price, String category) {
+    public Dish(String code, String name, float price, String category) {
         this.code = code;
         this.name = name;
         this.price = price;
@@ -61,11 +61,11 @@ public class Dish {
         this.code = code;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

@@ -2,6 +2,7 @@ package rinat.isangulov.stolovka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +20,6 @@ import java.util.*;
 public class BasketController {
 
     private static final String BASKET_CODE = "Basket";
-    private static ArrayList<Dish> DISH_REPOSITORY = new ArrayList<>();
-    private static final Map<Long, Dish> DISH_REPOSITORY_MAP = new HashMap<>();
-
-    private static final ArrayList<Dish> ORDER_REPOSITORY = new ArrayList<>();
-    private static final Map<String, ArrayList<Dish>> ORDER_REPOSITORY_MAP = new HashMap<>();
-
-    private static int count = 0;
-
 
     @Autowired
     private DishRepository dishRepository;
@@ -37,6 +30,10 @@ public class BasketController {
     @Autowired
     private OrderDishesRepository orderDishesRepository;
 
+    public User getCurrentUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
     @GetMapping("/basket")
     public String basketForm(@AuthenticationPrincipal User currentUser, Model model) {
         List<Order> currentUserOrdersFromDbList = orderRepository.findAllByUser(currentUser);
@@ -45,46 +42,64 @@ public class BasketController {
                 model.addAttribute("message", "Корзина пуста");
             } else {
                 if (order.getCode().equals(BASKET_CODE)) {
-                    List<OrderDishes> orderDishes = orderDishesRepository.findAllByOrderId(order.getId());
-                    ArrayList<Dish> dishes = new ArrayList<>();
-                    //HashMap<Dish, String> dishesMap = new HashMap<>();
-
-                    for (OrderDishes ordDish : orderDishes) {
-                        dishes.add(dishRepository.findDishById(ordDish.getDishId()));
-                        //dishesMap.put(dishRepository.findDishById(ordDish.getDishId()), String.valueOf(ordDish.getCount()));
-                    }
-                    model.addAttribute("dishes", dishes);
-                    //model.addAttribute("dishesMap", dishesMap);
+                    addDishesFromOrderToModel(order, model);
                 }
             }
         }
         return "basket";
     }
 
-    @PostMapping("/addDishToBasket")
-    public String dishSave(@AuthenticationPrincipal User currentUser, @RequestParam Long dishId, Model model) {
-        Dish dish = dishRepository.findDishById(dishId);
+    private void addDishesFromOrderToModel(Order order, Model model) {
+        List<OrderDishes> orderDishes = orderDishesRepository.findAllByOrderId(order.getId());
+        ArrayList<Dish> dishes = new ArrayList<>();
+        ArrayList<Integer> dishesCount = new ArrayList<>();
 
+        for (OrderDishes ordDish : orderDishes) {
+            dishes.add(dishRepository.findDishById(ordDish.getDishId()));
+            dishesCount.add(ordDish.getCount());
+        }
+
+        model.addAttribute("dishes", dishes);
+        model.addAttribute("dishesCount", dishesCount);
+        model.addAttribute("orderTotalCost", getOrderTotalCostFromDb());
+    }
+
+    @PostMapping("/addDishToBasket")
+    public String dishSave(@AuthenticationPrincipal User currentUser, @RequestParam Long dishId) {
+        Dish dish = dishRepository.findDishById(dishId);
         List<Order> ordersFromDb = orderRepository.findAllByUser(currentUser);
 
-        Order newOrder = new Order();
+        boolean hasBasket = false;
+        // если у пользователя нет заказов, то создается корзина, иначе добавление в существующую корзину
         if (ordersFromDb.isEmpty()) {
-            newOrder.setCode(BASKET_CODE);
-            newOrder.setActive(false);
-            newOrder.setCost(dish.getPrice());
-            newOrder.setUser(currentUser);
-            newOrder.setActive(false);
-            orderRepository.save(newOrder);
-            addDishToOrderDishes(currentUser, dish, newOrder);
+            addDishToOrderDishes(currentUser, dish, createBasketOrder(dish));
         } else {
             for (Order order : ordersFromDb) {
                 if (order.getCode().equals(BASKET_CODE)) {
                     addDishToOrderDishes(currentUser, dish, order);
+                    hasBasket = true;
+                    break;
                 }
             }
         }
+        if (!hasBasket) {
+            addDishToOrderDishes(currentUser, dish, createBasketOrder(dish));
+        }
 
         return "redirect:/";
+    }
+
+    private Order createBasketOrder(Dish dish) {
+        Order order = new Order();
+        order.setCode(BASKET_CODE);
+        order.setActive(false);
+        order.setCost(dish.getPrice());
+        order.setUser(getCurrentUser());
+        order.setActive(false);
+        order.setStatus("NEW");
+
+        orderRepository.save(order);
+        return order;
     }
 
     private void addDishToOrderDishes(User currentUser, Dish dish, Order order) {
@@ -93,27 +108,53 @@ public class BasketController {
         if (userBasketOrderId != null) {
             List<OrderDishes> orderDishesList = orderDishesRepository.findAllByOrderId(userBasketOrderId);
             for (OrderDishes ordDish : orderDishesList) {
+                // если блюдо уже добавлено в корзину, то увеличивается его количество
                 if (ordDish.getDishId().equals(dish.getId())) {
                     OrderDishes orderDishes2 = orderDishesRepository.findOrderDishesById(ordDish.getId());
                     int count = ordDish.getCount();
                     orderDishes2.setCount(++count);
+                    orderDishes2.setCost(dish.getPrice() * count);
                     orderDishesRepository.save(orderDishes2);
                     newDishFlag = false;
                     break;
                 }
             }
-        } else {
-            System.out.println("Сюда не должно попасть))");
         }
+
         if (newDishFlag) {
+            // новое блюдо в заказе
             OrderDishes orderDishes = new OrderDishes();
             orderDishes.setDishId(dish.getId());
             orderDishes.setOrderId(order.getId());
             orderDishes.setCount(1);
-            //TODO вычислять стоимость всего заказа
-            //orderDishes.setCost();
+            orderDishes.setCost(dish.getPrice());
             orderDishesRepository.save(orderDishes);
         }
+
+        //общая стоимость заказа
+        order.setCost(getOrderTotalCost());
+        orderRepository.save(order);
+    }
+
+    private float getOrderTotalCost() {
+        float totalCost = 0;
+        Long userBasketOrderId = getUserBasketOrderId(getCurrentUser());
+        if (userBasketOrderId != null) {
+            List<OrderDishes> orderDishesList = orderDishesRepository.findAllByOrderId(userBasketOrderId);
+            for (OrderDishes ordDish : orderDishesList) {
+                totalCost += ordDish.getCost();
+            }
+        }
+        return totalCost;
+    }
+
+    private float getOrderTotalCostFromDb() {
+        Long userBasketOrderId = getUserBasketOrderId(getCurrentUser());
+        if (userBasketOrderId != null) {
+            Order order = orderRepository.findOrderById(userBasketOrderId);
+            return order.getCost();
+        }
+        return 0;
     }
 
     private Long getUserBasketOrderId(User user) {
@@ -123,34 +164,32 @@ public class BasketController {
                 return order.getId();
             }
         }
-
         return null;
     }
 
     @PostMapping("/addOrder")
-    public String addOrder(@AuthenticationPrincipal User currentUser, Model model) {
+    public String addOrder(Model model) {
 
-        String pattern = "hhmmss-ddMMyyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String date = simpleDateFormat.format(new Date());
-
-        count++;
-        String orderCode = "A-0" + Integer.toString(count) + "-" + date;
-
-        ORDER_REPOSITORY_MAP.put(orderCode, ORDER_REPOSITORY);
-
-        String orderStatus = "Обрабатывается";
-
-        model.addAttribute("dishes", ORDER_REPOSITORY);
-        model.addAttribute("orderCode", orderCode);
-        model.addAttribute("orderStatus", orderStatus);
-        Order order = orderRepository.findOrderByCode("01");
-        if (order != null) {
-            order.setCost("0");
+        Long userBasketOrderId = getUserBasketOrderId(getCurrentUser());
+        if (userBasketOrderId != null) {
+            Order order = orderRepository.findOrderById(userBasketOrderId);
             order.setActive(true);
+
+            String newCode = String.valueOf(order.getId() % 1000);
+            order.setCode(newCode);
+            order.setStatus("PROCESSED");
+
+            String pattern = "hhmmss-ddMMyyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(new Date());
+            order.setDate(date);
+
             orderRepository.save(order);
+
+            model.addAttribute("order", order);
+            addDishesFromOrderToModel(order, model);
         }
-        currentUser.setCount(0);
+
         return "orderAccept";
     }
 

@@ -4,6 +4,7 @@ package rinat.isangulov.stolovka.controller;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import rinat.isangulov.stolovka.entity.Dish;
 import rinat.isangulov.stolovka.entity.Order;
+import rinat.isangulov.stolovka.entity.User;
 import rinat.isangulov.stolovka.repository.DishRepository;
 import rinat.isangulov.stolovka.repository.OrderRepository;
 
@@ -34,8 +36,8 @@ public class OrderController {
         return "orderAdministration";
     }
     @GetMapping("/orders")
-    public String ordersList(Model model) {
-        model.addAttribute("orders", orderRepository.findAll());
+    public String ordersList(@AuthenticationPrincipal User currentUser, Model model) {
+        model.addAttribute("orders", orderRepository.findAllByUserAndStatusNotContaining(currentUser, "NEW"));
 
         return "ordersList";
     }
@@ -68,11 +70,13 @@ public class OrderController {
         Order order = new Order();
         order.setCode("123123");
         order.setActive(true);
+/*
 
         Collection dishesList = new ArrayList();
         dishesList.add(dishRepository.findDishByCode("11078"));
         dishesList.add(dishRepository.findDishByCode("10446"));
         //order.setDishesOrderList(dishesList);
+*/
 
         orderRepository.save(order);
 

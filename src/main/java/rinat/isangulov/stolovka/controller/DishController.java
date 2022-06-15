@@ -69,7 +69,7 @@ public class DishController {
     @PostMapping("/dish")
     public String dishSave(
             @RequestParam String name,
-            @RequestParam String price,
+            @RequestParam float price,
             @RequestParam String category,
             @RequestParam("file") MultipartFile file,
             @RequestParam("dishId") Dish dish

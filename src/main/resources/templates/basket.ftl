@@ -25,7 +25,7 @@
                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                 </button>
                                 <div class="basket-item-count-number">
-                                    <span>1</span>
+                                    <span>${dishesCount[dish?index]!}</span>
                                 </div>
                                 <button class="basket-item-count-minus plus">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="basket-item-price total">
-                    ${totalSum!""} ₽
+                    ${orderTotalCost!0} ₽
                 </div>
                 <!--<button type="submit" class="btn">Оформить заказ</button>-->
                 <form action="/addOrder" method="post">

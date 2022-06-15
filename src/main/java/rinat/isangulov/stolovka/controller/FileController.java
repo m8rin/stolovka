@@ -36,7 +36,8 @@ public class FileController {
 
         String fileName = "src/main/resources/goods2.csv";
         ArrayList<Dish> dishes = new ArrayList<>();
-        String name, code, price;
+        String name, code;
+        float price;
         String line;
         String[] str;
 
@@ -50,7 +51,7 @@ public class FileController {
                     str = line.split(";");
                     code = str[0];
                     name = str[2];
-                    price = (!str[4].isEmpty()) ? str[4] : "0";
+                    price = Float.parseFloat((!str[4].isEmpty()) ? str[4] : "0");
 
                     dishes.add(new Dish(code, name, price));
                 }
@@ -73,7 +74,8 @@ public class FileController {
 
         String fileName = "src/main/resources/goods1.csv";
         ArrayList<Dish> dishes = new ArrayList<>();
-        String name, code, price;
+        String name, code;
+        float price;
         String line;
         String[] str;
 
@@ -87,7 +89,7 @@ public class FileController {
                     str = line.split(";");
                     code = str[0];
                     name = str[2];
-                    price = (!str[4].isEmpty()) ? str[4] : "0";
+                    price = Float.parseFloat((!str[4].isEmpty()) ? str[4] : "0");
 
                     dishes.add(new Dish(code, name, price));
                 }

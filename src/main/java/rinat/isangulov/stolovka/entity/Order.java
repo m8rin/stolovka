@@ -11,8 +11,15 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String code;
-    private String cost;
+    private float cost;
     private boolean active;
+    private String status;
+    private String date;
+
+   /* @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "order_status", joinColumns = @JoinColumn(name = "order_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Status> statuses;*/
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -73,11 +80,27 @@ public class Order {
         this.active = active;
     }
 
-    public String getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(float cost) {
         this.cost = cost;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
