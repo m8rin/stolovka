@@ -807,7 +807,11 @@ body {
     background: white;
     width: 40%;
     border-radius: 20px;
-
+}
+@media (max-width: 400px) {
+    .user-order-block{
+        width: 100%;
+    }
 }
 .user-order-number{
     font-size: 2rem;
