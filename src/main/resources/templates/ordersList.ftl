@@ -4,14 +4,46 @@
         <div class="main-title">История заказов</div>
         <div class="orderList-items">
 
-            <div class="orderList-item">
-                <div class="order-item-icon"><i class="fa fa-cutlery" aria-hidden="true"></i></div>
-                <div>
-                    <div class="order-item-info">А-45 - Готов</div>
-                    <div class="order-item-date">3 июня, 00:15</div>
+            <div class="orderList-item-with-icon">
+                <div style="width: 100%">
+                    <div class="orderList-item border" onclick="hideOrderDishes(this)">
+                        <div class="order-item-icon"><i class="fa fa-cutlery" aria-hidden="true"></i></div>
+                        <div>
+                            <div class="order-item-info">А-45 - Готов</div>
+                            <div class="order-item-date">3 июня, 00:15</div>
+                        </div>
+                        <div class="order-item-price">450 ₽</div>
+                    </div>
+
+                    <div class="orderList-item-dishes hidden">
+                        <div class="user-order-list-item">
+                            <div>Крышки гриль</div>
+                            <div>x 2</div>
+                        </div>
+                        <div class="user-order-list-item">
+                            <div>Крышки гриль</div>
+                            <div>x 2</div>
+                        </div>
+                        <div class="user-order-list-item">
+                            <div>Крышки гриль</div>
+                            <div>x 2</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="order-item-price">450 ₽</div>
+                <div style="align-self: start; padding-top: 8%">
+                    <i class="fa fa-undo fa-2x" aria-hidden="true"></i>
+                </div>
+
             </div>
+
+
+<#--                <#list dishes as dish>-->
+<#--                    <div class="user-order-list-item">-->
+<#--                        <div>${dish.name}</div>-->
+<#--                        <div>${dish.price}</div>-->
+<#--                    </div>-->
+<#--                </#list>-->
+
 
             <div class="orderList-item">
                 <div class="order-item-icon green"><i class="fa fa-flag-checkered" aria-hidden="true"></i></div>
