@@ -1021,13 +1021,18 @@ body {
     display: none;
 }
 
+.new-order .admin-orders-item-header,
+.new-order .admin-orders-item-dishes{
+    background: #cbfaff;
+}
+
 .active-order .admin-orders-item-header,
 .active-order .admin-orders-item-dishes{
-    background: yellow;
+    background: #f3f365;
 }
 .done-order .admin-orders-item-header,
 .done-order .admin-orders-item-dishes{
-    background: green;
+    background: #3def6b;/*зеленый   */
 }
 
 /*уведомления*/

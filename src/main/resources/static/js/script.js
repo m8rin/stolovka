@@ -29,8 +29,14 @@ function changeOrderStatus(e){
         e.remove();
     }
     else if(e.classList.contains("active-order")){
+        e.querySelector('span').innerText = "Готов";
         e.classList.remove("active-order");
-        e.classList.add("done-order")
+        e.classList.add("done-order");
+    }
+    else if(e.classList.contains("new-order")){
+        e.querySelector('span').innerText = "Собирается";
+        e.classList.remove("new-order");
+        e.classList.add("active-order")
     }
 
 }
